@@ -1,4 +1,4 @@
-# Aplikasi Java Desktop - Banyumusic #
+# Banyumusic (v 1.0.0) #
 
 > Oleh: Widia Rifkianti (4513215051)
 
