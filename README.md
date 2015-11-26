@@ -4,5 +4,5 @@
 
 ## Tujuan & Manfaat Aplikasi ##
 
-Pada konsepnya, aplikasi ini diharapkan menjadi aplikasi yang dapat menjadi penyedia layanan musik-musik indie.
+Pada konsepnya, aplikasi ini diharapkan dapat menjadi aplikasi penyedia layanan musik-musik indie.
 
