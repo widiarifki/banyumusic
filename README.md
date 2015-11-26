@@ -5,4 +5,5 @@
 ## Tujuan & Manfaat Aplikasi ##
 
 Pada konsepnya, aplikasi ini diharapkan dapat menjadi aplikasi penyedia layanan musik-musik indie.
+Meniru [iTunes](http://www.apple.com/itunes/), namun menyasar para pengguna yang merupakan penikmat atau penggemar musik indie khususnya di Indonesia.
 
