@@ -9,10 +9,10 @@ Sasaran pengguna adalah dari kalangan penikmat atau penggemar musik indie khusus
 
 ## Cara Instalasi ##
 
-1. Unduh aplikasi [disini](https://github.com/widiarifki/banyumusic/blob/master/target/banyumusic.exe)
+1. Unduh aplikasi [disini](https://github.com/widiarifki/banyumusic/raw/master/target/banyumusic.exe)
 
 ## Cara Pakai ##
 
 1. Eksekusi file .exe dari aplikasi
 2. Tampilan utama aplikasi
-![Tampilan Utama](screenshot/1mainFrame.jpg)
+![Tampilan Utama](screenshot/1mainFrame.png)
