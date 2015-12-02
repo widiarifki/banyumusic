@@ -1,7 +1,8 @@
 # Banyumusic (v 1.0.0) #
 
 > Oleh: Widia Rifkianti (4513215051)
-<Pedantry>(Tested only on Windows 10)</Pedantry>
+
+<small>(Tested only on Windows 10)</small>
 
 ## Tujuan & Manfaat Aplikasi ##
 
