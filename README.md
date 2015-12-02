@@ -2,7 +2,7 @@
 
 > Oleh: Widia Rifkianti (4513215051)
 
-*NOTE: Tested only on Windows 10*
+<sub>*NOTE: Tested only on Windows 10*</sub>
 
 ## Tujuan & Manfaat Aplikasi ##
 
