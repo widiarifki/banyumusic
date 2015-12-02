@@ -14,14 +14,14 @@ Sasaran pengguna adalah dari kalangan penikmat atau penggemar musik indie khusus
 
 ## Cara Pakai & Hasil yang Terjadi ##
 
-1. Eksekusi file banyumusic.exe dari aplikasi
-	![banyumusic.exe](screenshot/0icon.png)
+1. Eksekusi file banyumusic.exe dari aplikasi.
+   ![banyumusic.exe](screenshot/0icon.png)
 
 2. Jendela utama dari aplikasi akan muncul.
-	![Jendela Utama](screenshot/1mainFrame.png)
+   ![Jendela Utama](screenshot/1mainFrame.png)
 
 3. Saring lagu berdasar kategori genre menggunakan combobox atau *dropdown select* yang terdapat di pojok kiri jendela utama aplikasi.
-	![Saring lagu berdasar kategori](screenshot/2dropDown.png)
+   ![Saring lagu berdasar kategori](screenshot/2dropDown.png)
 
 4. Agar dapat menambahkan lagu ke dalam *playlist*, buat akun terlebih dahulu dengan mengklik tombol **Daftar** yang terdapat di pojok atas kanan jendela utama.
 	![Registrasi 1](screenshot/3clickReg.png)
