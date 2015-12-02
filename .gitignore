@@ -1,6 +1,7 @@
 /target/classes/*
 /target/generated-sources/*
 /target/maven-archiver/*
+/target/test-classes/maven-archiver/*
 /target/banyumusic-1.0.jar
 /target/banyumusic-1.0-shaded.jar
 /src/main/java/com/widiarifki/banyumusic/LaguFrame.form
