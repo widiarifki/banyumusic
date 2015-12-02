@@ -1,11 +1,5 @@
 package com.widiarifki.banyumusic;
 
-import javax.swing.ImageIcon;
-import java.awt.Image;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
-
 public class Playlist {
 
     private Integer id_lagu;
