@@ -18,22 +18,30 @@ import org.springframework.web.client.RestTemplate;
 public class MainFrame extends javax.swing.JFrame {
 
     private MainFrame mainFr = this;
+    private Integer idUser = 0;
+    private String namaUser;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         setTitle("Banyumusic");
         initComponents();
-        this.jLabel1.setVisible(false);
-        this.jButton3.setVisible(false);
+        this.helloLabel.setVisible(false);
+        this.playlistBtn.setVisible(false);
     }
 
-    public void aturBtn(String namaUser){
-        this.jLabel1.setText("Hi "+namaUser+" !");
-        this.jLabel1.setVisible(true);
-        this.jButton3.setVisible(true);
-        this.jButton1.setVisible(false);
-        this.jButton2.setVisible(false);
+    public void afterLogin(String namaUser, Integer idUser){
+        this.idUser = idUser;
+        this.namaUser = namaUser;
+        this.helloLabel.setText("Hi "+namaUser+" !");
+        this.helloLabel.setVisible(true);
+        this.playlistBtn.setVisible(true);
+        this.regBtn.setVisible(false);
+        this.loginBtn.setVisible(false);
+    }
+
+    public Integer getIdUser(){
+        return this.idUser;
     }
 
     /**
@@ -49,28 +57,27 @@ public class MainFrame extends javax.swing.JFrame {
         RestTemplate client = new RestTemplate();
 
         /*HTTP Request*/
-        final List<Lagu> laguData = new ArrayList<>();
+        List<Lagu> laguData = new ArrayList<>();
         String url = "http://widiarifki.com/banyumusic/lagu_json.php";
         Lagu rows[] = client.getForObject(url, Lagu[].class);
         for (Lagu l : rows) {
-            System.out.println(l.getTitle());
             laguData.add(l);
         }
         LaguModel laguMdl = new LaguModel(laguData);
         /*end - HTTP Request*/
-        jTable1 = new javax.swing.JTable(laguMdl){
+        laguTbl = new javax.swing.JTable(laguMdl){
+            /* agar ImageIcon muncul di kolom pertama */
             public Class getColumnClass(int column)
             {
                 return getValueAt(0, column).getClass();
             }
         };
         
-        jTable1.addMouseListener(new MouseAdapter() {
+        laguTbl.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent event)
             {
               if (event.getClickCount() == 2) {
 
-                System.out.println("double clicked");
                 JTable table = (JTable) event.getSource();
                 LaguModel model = (LaguModel)table.getModel();
                 int row = table.convertRowIndexToModel(table.getSelectedRow());
@@ -98,19 +105,19 @@ public class MainFrame extends javax.swing.JFrame {
             daftarGenre[daftarGenreOld.length] = g.getGenre();
         }
         /*end - HTTP Request*/
-        jComboBox1 = new javax.swing.JComboBox(daftarGenre);
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        genreComboBox = new javax.swing.JComboBox(daftarGenre);
+        regBtn = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
+        playlistBtn = new javax.swing.JButton();
+        helloLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.setRowHeight(150);
+        jScrollPane1.setViewportView(laguTbl);
+        laguTbl.setRowHeight(150);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,34 +130,32 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jComboBox1.addItemListener(new ItemListener() {
+        genreComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent itemEvent) {
                 changeGenreAction(itemEvent);
             }
         });
 
-        jButton1.setText("Daftar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        regBtn.setText("Daftar");
+        regBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                regBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Login");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setText("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("My Playlist");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        playlistBtn.setText("My Playlist");
+        playlistBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                playlistBtnActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,15 +167,15 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addComponent(helloLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(loginBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(regBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(playlistBtn)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -180,11 +185,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel1))
+                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playlistBtn)
+                    .addComponent(regBtn)
+                    .addComponent(loginBtn)
+                    .addComponent(helloLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                 .addContainerGap())
@@ -193,21 +198,23 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        System.out.println("Register");
+    private void regBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
         RegFrame reg = new RegFrame(this);
         reg.setVisible(true);
         reg.setTitle("Daftar");
     }                                        
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        LoginFrame login = new LoginFrame(this);
+        login.setVisible(true);
+        login.setTitle("Login");
+    }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void playlistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        MyPlaylist myPlaylist = new MyPlaylist(this, this.idUser);
+        myPlaylist.setVisible(true);
+        myPlaylist.setTitle(this.namaUser+" Playlist");
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,14 +252,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton regBtn;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JButton playlistBtn;
+    private javax.swing.JComboBox genreComboBox;
+    private javax.swing.JLabel helloLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable laguTbl;
     // End of variables declaration//GEN-END:variables
 
     private void changeGenreAction(ItemEvent itemEvent) {
@@ -266,41 +273,15 @@ public class MainFrame extends javax.swing.JFrame {
         List<Lagu> laguData = new ArrayList<>();
         Lagu rows[] = client.getForObject(url, Lagu[].class);
         for (Lagu l : rows) {
-            System.out.println(l.getTitle());
             laguData.add(l);
         }
         LaguModel laguMdl = new LaguModel(laguData);
-        jTable1.setModel(laguMdl);
+        laguTbl.setModel(laguMdl);
     }
 
     static private String selectedString(ItemSelectable is) {
         Object selected[] = is.getSelectedObjects();
         return ((selected.length == 0) ? "null" : (String) selected[0]);
-    }
-
-
-    class TabelClickListener implements ListSelectionListener {
-        private JTable tabel;
-        private List<Lagu> data;
-
-        public TabelClickListener(JTable t, List<Lagu> d){
-            tabel = t;
-            data = d;
-        }
-
-        public void valueChanged(ListSelectionEvent e){
-            Object eventSource = e.getSource();
-            System.out.println("Event source class : "+eventSource.getClass().getName());
-
-            System.out.println("Baris yang diklik : "+tabel.getSelectedRow());
-            
-            Lagu m = data.get(tabel.getSelectedRow());
-
-            System.out.println("NPM : "+m.getTitle());
-
-            LaguFrame laguFr = new LaguFrame(mainFr, m.getId());
-            laguFr.setVisible(true);
-        }
     }
 
 }
