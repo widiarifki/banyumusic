@@ -14,7 +14,7 @@ Sasaran pengguna adalah dari kalangan penikmat atau penggemar musik indie khusus
 2. Masuk ke direktori dimana unduhan tersimpan lalu klik ganda pada icon *executable file* tersebut
 
 > Catatan: Jika muncul peringatan seperti ini, klik **More Info** dan klik tombol **Run Anyway**
-> ![Warning 1](screenshot/0winwarning1.png)
+> ![Warning 1](screenshot/0winwarning.png)
 > ![Warning 2](screenshot/0winwarning2.png)
 
 ## Cara Pakai & Hasil yang Terjadi ##
