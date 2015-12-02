@@ -5,7 +5,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 public class LaguModel extends AbstractTableModel {
-    
     private List<Lagu> dataLagu;
 
     public LaguModel(List<Lagu> l){
