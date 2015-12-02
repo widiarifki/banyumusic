@@ -1,16 +1,21 @@
 # Banyumusic (v 1.0.0) #
 
 > Oleh: Widia Rifkianti (4513215051)
+> (Tested only on Windows 10)
 
 ## Tujuan & Manfaat Aplikasi ##
 
 Pada konsepnya, aplikasi ini diharapkan dapat menjadi aplikasi penyedia layanan musik-musik indie.
 Sasaran pengguna adalah dari kalangan penikmat atau penggemar musik indie khususnya di Indonesia.
 
-## Cara Instalasi ##
+## Cara Instalasi & Eksekusi ##
 
 1. Unduh *executable file* aplikasi [disini](https://github.com/widiarifki/banyumusic/raw/master/target/banyumusic.exe)
 2. Masuk ke direktori dimana unduhan tersimpan lalu klik ganda pada icon *executable file* tersebut
+
+> Catatan: Jika muncul peringatan seperti ini, klik **More Info** dan klik tombol **Run Anyway**
+> ![Warning 1](screenshot/0winwarning1.png)
+> ![Warning 2](screenshot/0winwarning2.png)
 
 ## Cara Pakai & Hasil yang Terjadi ##
 
