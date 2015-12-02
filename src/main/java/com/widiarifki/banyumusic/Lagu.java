@@ -7,7 +7,6 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class Lagu {
-
     private Integer id;
     private String title;
     private String artist;
@@ -74,6 +73,4 @@ public class Lagu {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-    
-    
 }
