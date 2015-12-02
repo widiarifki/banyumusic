@@ -17,11 +17,11 @@ import org.springframework.web.client.RestTemplate;
  */
 public class LoginFrame extends javax.swing.JFrame {
     
-    MainFrame mainFr;
+    Main mainFr;
     /**
      * Creates new form LoginFrame
      */
-    public LoginFrame(MainFrame mainFr) {
+    public LoginFrame(Main mainFr) {
         this.mainFr = mainFr;
         initComponents();
         setLocationRelativeTo(mainFr);

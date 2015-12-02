@@ -12,12 +12,12 @@ import org.springframework.web.client.RestTemplate;
  */
 public class RegFrame extends javax.swing.JFrame {
 
-    MainFrame mainFr;
+    Main mainFr;
 
     /**
      * Creates new form RegFrame
      */
-    public RegFrame(MainFrame mainFr){
+    public RegFrame(Main mainFr){
         this.mainFr = mainFr;
         initComponents();
         setLocationRelativeTo(mainFr);

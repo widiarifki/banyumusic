@@ -12,13 +12,13 @@ import org.springframework.web.client.RestTemplate;
  */
 public class LaguFrame extends javax.swing.JFrame {
 
-    private MainFrame mainFr;
+    private Main mainFr;
     private Integer idLagu;
 
     /**
      * Creates new form LaguFrame
      */
-    public LaguFrame(MainFrame mainFr, Integer idRow) {
+    public LaguFrame(Main mainFr, Integer idRow) {
         this.idLagu = idRow;
         this.mainFr = mainFr;
         initComponents();

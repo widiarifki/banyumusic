@@ -20,11 +20,11 @@ import org.springframework.web.client.RestTemplate;
 public class MyPlaylist extends javax.swing.JFrame {
     
     private Integer idUser;
-    private MainFrame mainFr;
+    private Main mainFr;
     /**
      * Creates new form MyPlaylist
      */
-    public MyPlaylist(MainFrame mainFr, Integer idUser) {
+    public MyPlaylist(Main mainFr, Integer idUser) {
         this.mainFr = mainFr;
         this.idUser = idUser;
         initComponents();
