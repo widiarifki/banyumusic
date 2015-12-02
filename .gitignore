@@ -1,7 +1,11 @@
-/target/
+/target/classes/*
+/target/generated-sources/*
+/target/maven-archiver/*
+/target/banyumusic-1.0.jar
+/target/banyumusic-1.0-shaded.jar
 /src/main/java/com/widiarifki/banyumusic/LaguFrame.form
 /src/main/java/com/widiarifki/banyumusic/Main.form
 /src/main/java/com/widiarifki/banyumusic/RegFrame.form
 /src/main/java/com/widiarifki/banyumusic/LoginFrame.form
 /src/main/java/com/widiarifki/banyumusic/MyPlaylist.form
-/src/main/resources/*"src/main/java/com/widiarifki/banyumusic/Main.form" 
+/src/main/resources/*
