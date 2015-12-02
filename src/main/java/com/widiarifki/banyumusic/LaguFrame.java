@@ -5,6 +5,10 @@
  */
 package com.widiarifki.banyumusic;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -13,23 +17,25 @@ import org.springframework.web.client.RestTemplate;
  */
 public class LaguFrame extends javax.swing.JFrame {
 
+    private MainFrame mainFr;
+    private Integer idLagu;
+
     /**
      * Creates new form LaguFrame
      */
-    //private MainFrame mainFr;
-    private Integer idLagu;
-
-    // CATATAN
-    // ngambil id nya berdasarkan baris tabel dulu bukan id data
-    // karena event saat click nya pake mouse listener bukan listselectionlistener
-    // makanya masih ada bug ketika data lagu di load per kategori
-
     public LaguFrame(MainFrame mainFr, Integer idRow) {
         this.idLagu = idRow;
-
+        this.mainFr = mainFr;
         initComponents();
         setLocationRelativeTo(mainFr);
         setResizable(false);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        /* jika user tidak login/belum register jangan tampilkan button 'tambah ke playlist' */
+        if(this.mainFr.getIdUser() == 0){
+            updatePlaylistBtn.setVisible(false);
+        }else{
+            updatePlaylistBtn.setVisible(true);
+        }
     }
 
     /**
@@ -44,44 +50,53 @@ public class LaguFrame extends javax.swing.JFrame {
         RestTemplate client = new RestTemplate();
         String url = "http://widiarifki.com/banyumusic/lagu_json.php?id_lagu="+this.idLagu;
         Lagu hasil = client.getForObject(url, Lagu.class);
-
         labelGambar = new javax.swing.JLabel();
         labelJudul = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        judulText = new javax.swing.JLabel();
+        artisText = new javax.swing.JLabel();
+        genreText = new javax.swing.JLabel();
         labelArtis = new javax.swing.JLabel();
         labelGenre = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        updatePlaylistBtn = new javax.swing.JButton();
+        closeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labelGambar.setIcon(hasil.getPicture());
-
-        jLabel3.setText("Judul");
-
-        jLabel4.setText("Artis");
-
-        jLabel5.setText("Genre");
+        labelGambar.setText("");
 
         labelJudul.setText(hasil.getTitle());
+
+        judulText.setText("Judul");
+
+        artisText.setText("Artis");
+
+        genreText.setText("Genre");
 
         labelArtis.setText(hasil.getArtist());
 
         labelGenre.setText(hasil.getGenre());
 
-        jButton1.setText("Tambah ke Playlist");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        String btnText;
+
+        String urlCheck = "http://widiarifki.com/banyumusic/playlist_check.php?id_lagu="+this.idLagu+"&id_user="+this.mainFr.getIdUser();
+        Map<String, Boolean> hasilCheck = client.getForObject(urlCheck, HashMap.class);
+        if(hasilCheck.get("is_exist")==true){
+            btnText = "Hapus dari Playlist";
+        }else{
+            btnText = "Tambah ke Playlist";
+        }
+        updatePlaylistBtn.setText(btnText);
+        updatePlaylistBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                updatePlaylistBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Tutup");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        closeBtn.setText("Tutup");
+        closeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setVisible(false);
+                closeBtnActionPerformed(evt);
             }
         });
 
@@ -96,19 +111,19 @@ public class LaguFrame extends javax.swing.JFrame {
                         .addComponent(labelGambar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                            .addComponent(judulText)
+                            .addComponent(artisText)
+                            .addComponent(genreText))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelJudul)
                             .addComponent(labelArtis)
                             .addComponent(labelGenre))
                         .addGap(96, 96, 96))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(updatePlaylistBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(closeBtn)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -120,35 +135,76 @@ public class LaguFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelJudul)
-                            .addComponent(jLabel3))
+                            .addComponent(judulText))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
+                            .addComponent(artisText)
                             .addComponent(labelArtis))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
+                            .addComponent(genreText)
                             .addComponent(labelGenre))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addContainerGap(98, Short.MAX_VALUE))
+                    .addComponent(updatePlaylistBtn)
+                    .addComponent(closeBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        labelGambar.getAccessibleContext().setAccessibleName("labelGambar");
-        labelJudul.getAccessibleContext().setAccessibleName("labelJudul");
+        labelGambar.getAccessibleContext().setAccessibleName("");
+        labelJudul.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_closeBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void updatePlaylistBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePlaylistBtnActionPerformed
+        Playlist p = new Playlist();
+        p.setId_lagu(this.idLagu);
+        p.setId_user(this.mainFr.getIdUser());
+
+        RestTemplate client = new RestTemplate();
+        String url = "http://widiarifki.com/banyumusic/playlist_update.php";
+        Map<String, Boolean> hasil = client.postForObject(url, p, HashMap.class);
+        if(hasil.get("status")){
+            final List<Lagu> laguData = new ArrayList<>();
+            String urlPlaylist = "http://widiarifki.com/banyumusic/playlist_json.php?id_user="+this.mainFr.getIdUser();
+            Playlist rows[] = client.getForObject(urlPlaylist, Playlist[].class);
+            for (Playlist pl : rows) {
+                laguData.add(pl.getData_lagu());
+            }
+            LaguModel laguMdl = new LaguModel(laguData){
+                public String getColumnName(int column){
+                    switch(column){
+                        case 0: return "Judul";
+                        case 1: return "Artis";
+                        case 2: return "Genre";
+                        default: return null;
+                    }
+                }
+                public int getColumnCount(){
+                    return 3;
+                }
+                public Object getValueAt(int row, int column){
+                    Lagu l = laguData.get(row);
+                    switch(column){
+                        case 0: return l.getTitle();
+                        case 1: return l.getArtist();
+                        case 2: return l.getGenre();
+                        default: return null;
+                    }
+                }
+            };
+            MyPlaylist myPlFrame = new MyPlaylist(this.mainFr, this.mainFr.getIdUser());
+            myPlFrame.setVisible(false);
+            myPlFrame.updatePlaylist(laguMdl);
+            myPlFrame.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_updatePlaylistBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,14 +242,14 @@ public class LaguFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel artisText;
+    private javax.swing.JButton closeBtn;
+    private javax.swing.JLabel genreText;
+    private javax.swing.JLabel judulText;
     private javax.swing.JLabel labelArtis;
     private javax.swing.JLabel labelGambar;
     private javax.swing.JLabel labelGenre;
     private javax.swing.JLabel labelJudul;
+    private javax.swing.JButton updatePlaylistBtn;
     // End of variables declaration//GEN-END:variables
 }
