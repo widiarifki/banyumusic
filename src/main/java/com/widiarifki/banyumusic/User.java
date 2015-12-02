@@ -11,7 +11,6 @@ public class User {
     private String email;
     private String password;
     private String gender;
-    //private boolean loginStatus;
 
     public Integer getId() {
         return id;
@@ -52,14 +51,6 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-    /*
-    public boolean getLoginStatus() {
-        return loginStatus;
-    }
-
-    public void setLoginStatus(boolean loginStatus) {
-        this.loginStatus = loginStatus;
-    }*/
     
     public void postUser(String name, String email, String password){
         User u = new User();
