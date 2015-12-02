@@ -14,7 +14,6 @@ Sasaran pengguna adalah dari kalangan penikmat atau penggemar musik indie khusus
 ## Cara Pakai ##
 
 1. Eksekusi file banyumusic.exe dari aplikasi
-
 ![banyumusic.exe](screenshot/0icon.png)
 
 2. Jendela utama dari aplikasi akan muncul.
