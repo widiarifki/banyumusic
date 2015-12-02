@@ -1,7 +1,6 @@
 package com.widiarifki.banyumusic;
 
 public class Genre {
-
     private Integer id;
     private String genre;
 
