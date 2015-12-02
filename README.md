@@ -7,3 +7,4 @@
 Pada konsepnya, aplikasi ini diharapkan dapat menjadi aplikasi penyedia layanan musik-musik indie.
 Meniru [iTunes](http://www.apple.com/itunes/), namun menyasar pengguna dari kalangan penikmat atau penggemar musik indie khususnya di Indonesia.
 
+![Figure 0.1](images/nama.jpg)
