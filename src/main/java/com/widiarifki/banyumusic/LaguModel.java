@@ -31,8 +31,6 @@ public class LaguModel extends AbstractTableModel {
             case 3: return l.getGenre();
             default: return null;
         }
-
-        //return l;
     }
 
     public String getColumnName(int column){
@@ -47,7 +45,6 @@ public class LaguModel extends AbstractTableModel {
     }
 
     public Lagu getRowAt(int row) {
-        //Lagu l = dataLagu.get(row);
         Lagu l = dataLagu.get(row);
 
         return l;
